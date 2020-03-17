@@ -1,7 +1,7 @@
-import java.awt.BasicStroke;
+package tron;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
