@@ -1,4 +1,4 @@
-package tron;
+package main.java.tron;
 
 public enum Direction {
     UP,

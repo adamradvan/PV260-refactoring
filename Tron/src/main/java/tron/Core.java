@@ -1,4 +1,4 @@
-package tron;
+package main.java.tron;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
