@@ -10,8 +10,21 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-public class yourclass extends Core implements KeyListener, MouseListener,
-		MouseMotionListener {
+public class yourclass extends Core implements KeyListener, 
+                                               MouseListener,
+                                               MouseMotionListener {
+        Player player1 = new Player(Color.green, 
+                                    GameConfiguration.PLAYER_1_CONTROLS, 
+                                    40, 
+                                    40, 
+                                    Direction.LEFT);
+        
+        Player player2 = new Player(Color.red,
+                                    GameConfiguration.PLAYER_2_CONTROLS,
+                                    600, 
+                                    440, 
+                                    Direction.RIGHT);
+        
 	int centrex1 = 40;
 	int centrey1 = 40;
 	int centrex2 = 600;
