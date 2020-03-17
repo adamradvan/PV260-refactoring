@@ -1,2 +1,8 @@
 /Tron/nbproject/private/
 /Tron/build/
+Tron/build.xml
+Tron/manifest.mf
+Tron/nbproject/build-impl.xml
+Tron/nbproject/genfiles.properties
+Tron/nbproject/project.properties
+Tron/nbproject/project.xml
