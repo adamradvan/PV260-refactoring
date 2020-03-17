@@ -1,8 +1,8 @@
 package tron;
 
 public enum Direction {
-    UP, 
-    DOWN, 
-    RIGHT, 
+    UP,
+    DOWN,
+    RIGHT,
     LEFT
 }
