@@ -1,9 +1,10 @@
 package tron;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Core {
+public abstract class Core implements KeyListener, MouseListener, MouseMotionListener {
 
     private static final DisplayMode[] modes =
             {
@@ -27,6 +28,7 @@ public abstract class Core {
         } finally {
             screenManager.restoreScreen();
         }
+        System.exit(0);
     }
 
     public void init() {
@@ -39,6 +41,9 @@ public abstract class Core {
         window.setFont(new Font("Arial", Font.PLAIN, 20));
         window.setBackground(Color.WHITE);
         window.setForeground(Color.RED);
+        window.addKeyListener(this);
+        window.addMouseListener(this);
+        window.addMouseMotionListener(this);
 
         Cursor cursor = window.getToolkit().createCustomCursor(new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "null");
         window.setCursor(cursor);
@@ -56,11 +61,61 @@ public abstract class Core {
 
             try {
                 Thread.sleep(20);
-            } catch (Exception ignored) {
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
 
+    public void stopGame() {
+        running = false;
+    }
+
+
     public abstract void draw(Graphics2D g);
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
 }

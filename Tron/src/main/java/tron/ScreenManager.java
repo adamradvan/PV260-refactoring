@@ -22,7 +22,7 @@ public class ScreenManager {
                 }
             }
         }
-        return null;
+        throw new IllegalArgumentException("There is no good display mode available.");
     }
 
     public boolean displayModesMatch(DisplayMode mode1, DisplayMode mode2) {
@@ -44,22 +44,20 @@ public class ScreenManager {
         screen.setFullScreenWindow(frame);
 
         if (displayMode != null && screen.isDisplayChangeSupported()) {
-            try {
-                screen.setDisplayMode(displayMode);
-            } catch (Exception ignored) {
-            }
-
-            frame.createBufferStrategy(2);
+            screen.setDisplayMode(displayMode);
         }
+        frame.createBufferStrategy(2);
+
     }
 
     public Graphics2D getGraphics() {
         Window window = screen.getFullScreenWindow();
         if (window != null) {
             BufferStrategy buffer = window.getBufferStrategy();
+            if (buffer == null) throw new RuntimeException("Unavailable buffer strategy");
             return (Graphics2D) buffer.getDrawGraphics();
         } else {
-            return null;
+            throw new RuntimeException("Unavailable window");
         }
     }
 

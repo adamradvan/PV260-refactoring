@@ -16,17 +16,22 @@ public class Position {
     public int getAxisY() {
         return axisY;
     }
-    
+
     public boolean equals(Position position) {
         if (this == position) {
             return true;
         }
-        
-        if ( position == null) {
+
+        if (position == null) {
             return false;
         }
-                       
+
         return this.axisX == position.getAxisX() &&
-               this.axisY == position.getAxisY();
-        }
+                this.axisY == position.getAxisY();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{%d, %d}", axisX, axisY);
+    }
 }
