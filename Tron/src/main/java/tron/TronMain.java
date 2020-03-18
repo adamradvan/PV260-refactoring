@@ -5,7 +5,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class TronMain extends Core implements KeyListener, MouseListener, MouseMotionListener {
-
+    int pressedKey;
+    
     Player player1 = new Player(Color.green, GameConfiguration.PLAYER_1_CONTROLS, 40, 40, Direction.RIGHT);
     Player player2 = new Player(Color.red, GameConfiguration.PLAYER_2_CONTROLS, 600, 440, Direction.LEFT);
 
@@ -25,8 +26,8 @@ public class TronMain extends Core implements KeyListener, MouseListener, MouseM
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, screenManager.getWidth(), screenManager.getHeight());
-        player1.draw(graphics, screenManager);
-        player2.draw(graphics, screenManager);
+        player1.makeMove(pressedKey, screenManager, graphics);
+        player2.makeMove(pressedKey, screenManager, graphics);
         
         for(Position position : player1.getBikePath()) {
             if( position.equals(player2.getCurrentPosition()) ||
@@ -46,8 +47,7 @@ public class TronMain extends Core implements KeyListener, MouseListener, MouseM
     }
 
     public void keyPressed(KeyEvent event) {
-        player1.keyPressed(event);
-        player2.keyPressed(event);
+        pressedKey = event.getKeyCode();
     }
 
     public void keyReleased(KeyEvent e) {

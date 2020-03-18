@@ -11,7 +11,9 @@ public class Player implements KeyListener {
     private Color color;
     private ArrayList<Position> bikePath = new ArrayList<>();
     private Direction currentDirection;
+    private Direction nextDirection;
     private Position currentPosition;
+    private Position nextPosition;
 
     public Player(Color color,
                   int[] controls,
@@ -33,21 +35,7 @@ public class Player implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent pressedKeyEvent) {
-        if (pressedKeyEvent.getKeyCode() == controls.getUp() && !currentDirection.equals(Direction.DOWN)) {
-            currentDirection = Direction.UP;
-        }
-
-        if (pressedKeyEvent.getKeyCode() == controls.getDown() && !currentDirection.equals(Direction.UP)) {
-            currentDirection = Direction.DOWN;
-        }
-
-        if (pressedKeyEvent.getKeyCode() == controls.getRight() && !currentDirection.equals(Direction.LEFT)) {
-            currentDirection = Direction.RIGHT;
-        }
-
-        if (pressedKeyEvent.getKeyCode() == controls.getLeft() && !currentDirection.equals(Direction.RIGHT)) {
-            currentDirection = Direction.LEFT;
-        }
+        
     }
 
     @Override
@@ -55,54 +43,86 @@ public class Player implements KeyListener {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Direction getCurrentDirection() {
-        return currentDirection;
+    public void makeMove(int directionCommand, 
+                         ScreenManager screenManager,
+                         Graphics2D graphics) {
+        findDirectionOfNextMove(directionCommand);
+        computeNextPosition(screenManager);
+        addNextPositionToPath();
+        drawBikePath(graphics);
+        currentDirection = nextDirection;
+        currentPosition = nextPosition;
     }
     
-    public void draw(Graphics2D graphics, ScreenManager screenManager) {
-        switch (currentDirection) {
+    public void findDirectionOfNextMove(int directionCommand) {
+        if (directionCommand == controls.getUp() && !currentDirection.equals(Direction.DOWN)) {
+            nextDirection = Direction.UP;
+        } else if (directionCommand == controls.getDown() && !currentDirection.equals(Direction.UP)) {
+            nextDirection = Direction.DOWN;
+        } else if (directionCommand == controls.getRight() && !currentDirection.equals(Direction.LEFT)) {
+            nextDirection = Direction.RIGHT;
+        } else if (directionCommand == controls.getLeft() && !currentDirection.equals(Direction.RIGHT)) {
+            nextDirection = Direction.LEFT;
+        } else {
+            nextDirection = currentDirection;
+        }
+    }
+    
+    public void computeNextPosition(ScreenManager screenManager) {
+        switch (nextDirection) {
             case UP:
                 if (currentPosition.getAxisY() > 0) {
-                    currentPosition = new Position(currentPosition.getAxisX(),
+                    nextPosition = new Position(currentPosition.getAxisX(),
                                                    currentPosition.getAxisY() - MOVE_AMOUNT);
                 } else {
-                    currentPosition = new Position(currentPosition.getAxisX(),
+                    nextPosition = new Position(currentPosition.getAxisX(),
                                                    screenManager.getHeight());
                 }
                 break;
             case DOWN:
                 if (currentPosition.getAxisY() < screenManager.getHeight()) {
-                    currentPosition = new Position(currentPosition.getAxisX(),
+                    nextPosition = new Position(currentPosition.getAxisX(),
                                                    currentPosition.getAxisY() + MOVE_AMOUNT);
                 } else {
-                    currentPosition = new Position(currentPosition.getAxisX(), 0);
+                    nextPosition = new Position(currentPosition.getAxisX(), 0);
                 }
                 break;
             case RIGHT:
                 if (currentPosition.getAxisX() < screenManager.getWidth()) {
-                    currentPosition = new Position(currentPosition.getAxisX() + MOVE_AMOUNT,
+                    nextPosition = new Position(currentPosition.getAxisX() + MOVE_AMOUNT,
                                                    currentPosition.getAxisY());
                 } else {
-                    currentPosition = new Position(0, currentPosition.getAxisY());
+                    nextPosition = new Position(0, currentPosition.getAxisY());
                 }
                 break;
             case LEFT:
                 if (currentPosition.getAxisX() > 0) {
-                    currentPosition = new Position(currentPosition.getAxisX() - MOVE_AMOUNT,
+                    nextPosition = new Position(currentPosition.getAxisX() - MOVE_AMOUNT,
                                                    currentPosition.getAxisY());
                 } else {
-                    currentPosition = new Position(screenManager.getWidth(),
+                    nextPosition = new Position(screenManager.getWidth(),
                                                    currentPosition.getAxisY());
                 }
                 break;
+            default:
+                nextPosition = null;
+                break;
         }
-        
-        bikePath.add(currentPosition);
-
+    }
+    
+    public void addNextPositionToPath() {
+        bikePath.add(nextPosition);
+    }
+    
+    public void drawBikePath(Graphics2D graphics) {
         for (Position position : bikePath) {
             graphics.setColor(color);
-            graphics.fillRect(position.getAxisX(), position.getAxisY(), 10, 10);
+            graphics.fillRect(position.getAxisX(), position.getAxisY(), 5, 5);
         }
+    }
+        
+    public Direction getCurrentDirection() {
+        return currentDirection;
     }
     
     public Position getCurrentPosition() {
