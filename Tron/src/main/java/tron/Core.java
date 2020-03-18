@@ -1,10 +1,9 @@
 package tron;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Core implements KeyListener, MouseListener, MouseMotionListener {
+public abstract class Core implements GeneralListener {
 
     private static final DisplayMode[] modes =
             {
@@ -43,7 +42,6 @@ public abstract class Core implements KeyListener, MouseListener, MouseMotionLis
         window.setForeground(Color.RED);
         window.addKeyListener(this);
         window.addMouseListener(this);
-        window.addMouseMotionListener(this);
 
         Cursor cursor = window.getToolkit().createCustomCursor(new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "null");
         window.setCursor(cursor);
@@ -74,48 +72,4 @@ public abstract class Core implements KeyListener, MouseListener, MouseMotionLis
 
     public abstract void draw(Graphics2D g);
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }

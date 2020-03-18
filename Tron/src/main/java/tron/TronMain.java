@@ -5,26 +5,16 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TronMain extends Core implements KeyListener, MouseListener {
-    int pressedKey;
-
 public class TronMain extends Core {
+    int pressedKey;
 
     Player player1 = new Player(Color.green, GameConfiguration.PLAYER_1_CONTROLS, 40, 40, Direction.RIGHT);
     Player player2 = new Player(Color.red, GameConfiguration.PLAYER_2_CONTROLS, 600, 440, Direction.LEFT);
-
     List<Player> players = List.of(player1, player2);
+
 
     public static void main(String[] args) {
         new TronMain().run();
-    }
-
-    public void init() {
-        super.init();
-
-        Window window = screenManager.getFullScreenWindow();
-        window.addKeyListener(this);
-        window.addMouseListener(this);
     }
 
     public void draw(Graphics2D graphics) {
@@ -32,22 +22,16 @@ public class TronMain extends Core {
         graphics.fillRect(0, 0, screenManager.getWidth(), screenManager.getHeight());
         player1.makeMove(pressedKey, screenManager, graphics);
         player2.makeMove(pressedKey, screenManager, graphics);
-        
-        for(Position position : player1.getBikePath()) {
-            if( position.equals(player2.getCurrentPosition()) ||
-                ( position.equals(player1.getCurrentPosition()) && 
-                  position != player1.getCurrentPosition()) ) {
-                System.exit(0);
-            }           
 
-        player1.draw(graphics, screenManager);
-        player2.draw(graphics, screenManager);
+        checkForPlayersCollisions();
 
+    }
+
+    private void checkForPlayersCollisions() {
         for (Player player : players) {
             checkPlayerPath(player);
             checkOthersPath(player);
         }
-
     }
 
     private void checkOthersPath(Player player) {
@@ -76,27 +60,4 @@ public class TronMain extends Core {
         pressedKey = event.getKeyCode();
     }
 
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    public void keyTyped(KeyEvent arg0) {
-
-    }
-
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    public void mouseEntered(MouseEvent arg0) {
-    }
-
-    public void mouseExited(MouseEvent arg0) {
-    }
-
-    public void mousePressed(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
 }
