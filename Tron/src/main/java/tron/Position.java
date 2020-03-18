@@ -1,4 +1,4 @@
-package main.java.tron;
+package tron;
 
 public class Position {
     private int axisX;

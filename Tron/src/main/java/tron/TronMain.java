@@ -1,4 +1,4 @@
-package main.java.tron;
+package tron;
 
 import java.awt.*;
 import java.awt.event.*;

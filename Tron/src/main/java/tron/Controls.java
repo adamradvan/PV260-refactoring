@@ -1,4 +1,4 @@
-package main.java.tron;
+package tron;
 
 public class Controls {
     private int up;

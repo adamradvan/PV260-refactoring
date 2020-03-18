@@ -1,4 +1,4 @@
-package main.java.tron;
+package tron;
 
 import javax.swing.*;
 import java.awt.*;
