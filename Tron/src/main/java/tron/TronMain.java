@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
+public class TronMain extends Core implements KeyListener, MouseListener {
+    int pressedKey;
+
 public class TronMain extends Core {
 
     Player player1 = new Player(Color.green, GameConfiguration.PLAYER_1_CONTROLS, 40, 40, Direction.RIGHT);
@@ -16,9 +19,26 @@ public class TronMain extends Core {
         new TronMain().run();
     }
 
+    public void init() {
+        super.init();
+
+        Window window = screenManager.getFullScreenWindow();
+        window.addKeyListener(this);
+        window.addMouseListener(this);
+    }
+
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, screenManager.getWidth(), screenManager.getHeight());
+        player1.makeMove(pressedKey, screenManager, graphics);
+        player2.makeMove(pressedKey, screenManager, graphics);
+        
+        for(Position position : player1.getBikePath()) {
+            if( position.equals(player2.getCurrentPosition()) ||
+                ( position.equals(player1.getCurrentPosition()) && 
+                  position != player1.getCurrentPosition()) ) {
+                System.exit(0);
+            }           
 
         player1.draw(graphics, screenManager);
         player2.draw(graphics, screenManager);
@@ -53,7 +73,30 @@ public class TronMain extends Core {
 
     @Override
     public void keyPressed(KeyEvent event) {
-        player1.keyPressed(event);
-        player2.keyPressed(event);
+        pressedKey = event.getKeyCode();
+    }
+
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    public void keyTyped(KeyEvent arg0) {
+
+    }
+
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    public void mouseEntered(MouseEvent arg0) {
+    }
+
+    public void mouseExited(MouseEvent arg0) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
     }
 }
