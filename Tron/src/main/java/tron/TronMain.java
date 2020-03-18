@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class TronMain extends Core implements KeyListener, MouseListener, MouseMotionListener {
+public class TronMain extends Core implements KeyListener, MouseListener {
     int pressedKey;
     
     Player player1 = new Player(Color.green, GameConfiguration.PLAYER_1_CONTROLS, 40, 40, Direction.RIGHT);
@@ -20,7 +20,6 @@ public class TronMain extends Core implements KeyListener, MouseListener, MouseM
         Window window = screenManager.getFullScreenWindow();
         window.addKeyListener(this);
         window.addMouseListener(this);
-        window.addMouseMotionListener(this);
     }
 
     public void draw(Graphics2D graphics) {
@@ -57,7 +56,7 @@ public class TronMain extends Core implements KeyListener, MouseListener, MouseM
     public void keyTyped(KeyEvent arg0) {
 
     }
-
+    
     public void mouseClicked(MouseEvent e) {
 
     }
@@ -72,13 +71,5 @@ public class TronMain extends Core implements KeyListener, MouseListener, MouseM
     }
 
     public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    public void mouseMoved(MouseEvent e) {
-
-    }
+    }    
 }

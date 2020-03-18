@@ -1,11 +1,9 @@
 package tron;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class Player implements KeyListener {
+public class Player {
     private static final int MOVE_AMOUNT = 5;
     private Controls controls;
     private Color color;
@@ -26,21 +24,6 @@ public class Player implements KeyListener {
 
         this.currentPosition = new Position(initialXPosition, initialYPosition);
         bikePath.add(this.currentPosition);
-    }
-
-    @Override
-    public void keyTyped(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void keyPressed(KeyEvent pressedKeyEvent) {
-        
-    }
-
-    @Override
-    public void keyReleased(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void makeMove(int directionCommand, 
