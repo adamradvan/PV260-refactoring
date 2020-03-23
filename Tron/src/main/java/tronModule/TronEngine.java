@@ -4,9 +4,8 @@ import generalEngine.Controls;
 import generalEngine.Direction;
 import generalEngine.Engine;
 import generalEngine.GameObject;
+
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,23 +16,21 @@ public class TronEngine extends Engine {
         super(graphicsInterface);
     }   
 
-    Bike player1 = new Bike(GameConfiguration.MOVE_AMOUNT,
-                                  Color.green,
-                                  new Controls(GameConfiguration.PLAYER_1_CONTROLS[0],
-                                               GameConfiguration.PLAYER_1_CONTROLS[1],
-                                               GameConfiguration.PLAYER_1_CONTROLS[2],
-                                               GameConfiguration.PLAYER_1_CONTROLS[3]),
-                                  new Position(40, 40),
-                                  Direction.RIGHT);
-    
-    Bike player2 = new Bike(GameConfiguration.MOVE_AMOUNT,
-                                  Color.red,
-                                  new Controls(GameConfiguration.PLAYER_2_CONTROLS[0],
-                                               GameConfiguration.PLAYER_2_CONTROLS[1],
-                                               GameConfiguration.PLAYER_2_CONTROLS[2],
-                                               GameConfiguration.PLAYER_2_CONTROLS[3]),
-                                  new Position(600, 440),
-                                  Direction.LEFT);
+    Bike player1 = new Bike(Color.green,
+            new Controls(TronGameConfiguration.PLAYER_1_CONTROLS[0],
+                    TronGameConfiguration.PLAYER_1_CONTROLS[1],
+                    TronGameConfiguration.PLAYER_1_CONTROLS[2],
+                    TronGameConfiguration.PLAYER_1_CONTROLS[3]),
+            new Position(40, 40),
+            Direction.RIGHT);
+
+    Bike player2 = new Bike(Color.red,
+            new Controls(TronGameConfiguration.PLAYER_2_CONTROLS[0],
+                    TronGameConfiguration.PLAYER_2_CONTROLS[1],
+                    TronGameConfiguration.PLAYER_2_CONTROLS[2],
+                    TronGameConfiguration.PLAYER_2_CONTROLS[3]),
+            new Position(600, 440),
+            Direction.LEFT);
               
     List<GameObject> playerObjects = List.of(player1, player2);
     List<Bike> players = List.of(player1, player2);
@@ -78,7 +75,7 @@ public class TronEngine extends Engine {
     }
 
     @Override
-    public void checkColisions() {
+    public void checkCollisions() {
         checkForPlayersCollisions();
     } 
 }

@@ -3,31 +3,33 @@ package tronModule;
 import generalEngine.Controls;
 import generalEngine.Direction;
 import generalEngine.GameObject;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
 
-public class Bike implements GameObject{
-    private int moveAmount;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static tronModule.TronGameConfiguration.MOVE_AMOUNT;
+
+public class Bike implements GameObject {
+    private static final TronGameConfiguration.GameObjectType GAME_OBJECT_TYPE = TronGameConfiguration.GameObjectType.Bike;
+
     private Controls controls;
     private Color color;
     private Position currentPosition;
     private Position nextPosition;
     private Direction currentDirection;
     private Direction nextDirection;
-    private GameConfiguration.GameObjectType type = GameConfiguration.GameObjectType.Bike;  
-    private ArrayList<Position> bikePath = new ArrayList<>();
-    
-    public Bike(int moveAmount,
-                Color color,
-                Controls controls,
-                Position initialPosition,
-                Direction initialDirection) {        
-        this.moveAmount = moveAmount;
+    private List<Position> bikePath = new ArrayList<>();
+
+    public Bike(
+            Color color,
+            Controls controls,
+            Position initialPosition,
+            Direction initialDirection) {
         this.controls = controls;
         this.color = color;
         this.currentPosition = initialPosition;
-        this.currentDirection = initialDirection;        
+        this.currentDirection = initialDirection;
     }
 
     @Override
@@ -47,79 +49,43 @@ public class Bike implements GameObject{
     }
 
      protected void findDirectionOfNextMove(Direction directionCommand) {
-        nextDirection = directionCommand.checkNextMoveDirection(currentDirection);
+         nextDirection = directionCommand.checkNextMoveDirection(currentDirection);
+     }
+
+
+    protected void computeNextPosition() {
+        if (nextDirection.isNextPositionInScreenScope(currentPosition)) {
+            nextPosition = nextDirection.newPositionInsideScreenScope(currentPosition);
+        } else
+            nextPosition = nextDirection.newPositionAtScreenBeginning(currentPosition);
     }
 
-
-    //TODO: refactor this method to remove screen overflows
-    protected void computeNextPosition() {
-        switch (nextDirection) {
-            case UP:
-                if (currentPosition.getAxisY() > 0) {
-                    nextPosition = new Position(currentPosition.getAxisX(),
-                                                   currentPosition.getAxisY() - moveAmount);
-                } else {
-                    nextPosition = new Position(currentPosition.getAxisX(),
-                                                   ScreenParameters.getInstance().height);
-                }
-                break;
-            case DOWN:
-                if (currentPosition.getAxisY() < ScreenParameters.getInstance().height) {
-                    nextPosition = new Position(currentPosition.getAxisX(),
-                                                   currentPosition.getAxisY() + moveAmount);
-                } else {
-                    nextPosition = new Position(currentPosition.getAxisX(), 0);
-                }
-                break;
-            case RIGHT:
-                if (currentPosition.getAxisX() < ScreenParameters.getInstance().width) {
-                    nextPosition = new Position(currentPosition.getAxisX() + moveAmount,
-                                                   currentPosition.getAxisY());
-                } else {
-                    nextPosition = new Position(0, currentPosition.getAxisY());
-                }
-                break;
-            case LEFT:
-                if (currentPosition.getAxisX() > 0) {
-                    nextPosition = new Position(currentPosition.getAxisX() - moveAmount,
-                                                   currentPosition.getAxisY());
-                } else {
-                    nextPosition = new Position(ScreenParameters.getInstance().width,
-                                                   currentPosition.getAxisY());
-                }
-                break;
-            default:
-                nextPosition = null;
-                break;
-        }
+    private void addNextPositionToPath() {
+        bikePath.add(nextPosition);
     }
 
     @Override
     public void onCollision(GameObject gameObject) {
-        
+
     }
 
     @Override
-    public GameConfiguration.GameObjectType getType() {
-        return type;
+    public TronGameConfiguration.GameObjectType getType() {
+        return GAME_OBJECT_TYPE;
     }
-    
+
     @Override
     public void drawObject(Graphics2D graphics) {
         for (Position position : bikePath) {
             graphics.setColor(color);
-            graphics.fillRect(position.getAxisX(), position.getAxisY(), 5, 5);
+            graphics.fillRect(position.getAxisX(), position.getAxisY(), MOVE_AMOUNT, MOVE_AMOUNT);
         }
     }
-    
-    private void addNextPositionToPath() {
-        bikePath.add(nextPosition);
-    }
-    
-    public ArrayList<Position> getBikePath() {
+
+    public List<Position> getBikePath() {
         return bikePath;
     }
-    
+
     public Position getCurrentPosition() {
         return currentPosition;
     }

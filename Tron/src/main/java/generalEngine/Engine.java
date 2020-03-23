@@ -1,21 +1,20 @@
 package generalEngine;
 
-import java.awt.DisplayMode;
-import java.awt.Graphics2D;
-import java.awt.Window;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.List;
 import tronModule.GraphicsCallBack;
 import tronModule.ScreenManager;
 import tronModule.ScreenParameters;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 
 public abstract class Engine implements ListenerManager {
     private List<GameObject> gameObjects;
     private GraphicsCallBack presentationGraphics;
     protected ScreenManager screenManager = new ScreenManager();
-    ScreenParameters screenParameters = ScreenParameters.getInstance();
+    protected ScreenParameters screenParameters = ScreenParameters.getInstance();
     private int pressedKey;
     private boolean running;
     
@@ -54,8 +53,8 @@ public abstract class Engine implements ListenerManager {
     
     public void gameLoop() {
         while (running) {
-            presentationGraphics.onUpdateGraphics(gameObjects);            
-            checkColisions();
+            presentationGraphics.onUpdateGraphics(gameObjects);
+            checkCollisions();
             for(GameObject gameObject : gameObjects) {
                 gameObject.makeMove(pressedKey);
             }
@@ -94,6 +93,6 @@ public abstract class Engine implements ListenerManager {
     public void mouseClicked(MouseEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public abstract void checkColisions();
+
+    public abstract void checkCollisions();
 }

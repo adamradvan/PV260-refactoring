@@ -2,7 +2,7 @@ package tronModule;
 
 import java.awt.event.KeyEvent;
 
-public class GameConfiguration {
+public class TronGameConfiguration {
     public enum GameObjectType{ Bike }
 
     public static final int MOVE_AMOUNT = 5;
