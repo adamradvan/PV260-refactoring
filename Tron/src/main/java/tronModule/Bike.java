@@ -3,15 +3,16 @@ package tronModule;
 import generalEngine.Controls;
 import generalEngine.Direction;
 import generalEngine.GameObject;
+import tronModule.config.TronGameConfiguration;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static tronModule.TronGameConfiguration.MOVE_AMOUNT;
+import static tronModule.config.TronGameConfiguration.MOVE_AMOUNT;
 
 public class Bike implements GameObject {
-    private static final TronGameConfiguration.GameObjectType GAME_OBJECT_TYPE = TronGameConfiguration.GameObjectType.Bike;
+    private static final TronGameConfiguration.GameObjectType GAME_OBJECT_TYPE = TronGameConfiguration.GameObjectType.BIKE;
 
     private Controls controls;
     private Color color;
@@ -26,8 +27,8 @@ public class Bike implements GameObject {
             Controls controls,
             Position initialPosition,
             Direction initialDirection) {
-        this.controls = controls;
         this.color = color;
+        this.controls = controls;
         this.currentPosition = initialPosition;
         this.currentDirection = initialDirection;
     }
@@ -48,12 +49,12 @@ public class Bike implements GameObject {
         return direction;
     }
 
-     protected void findDirectionOfNextMove(Direction directionCommand) {
-         nextDirection = directionCommand.checkNextMoveDirection(currentDirection);
-     }
+    private void findDirectionOfNextMove(Direction directionCommand) {
+        nextDirection = directionCommand.checkNextMoveDirection(currentDirection);
+    }
 
 
-    protected void computeNextPosition() {
+    private void computeNextPosition() {
         if (nextDirection.isNextPositionInScreenScope(currentPosition)) {
             nextPosition = nextDirection.newPositionInsideScreenScope(currentPosition);
         } else

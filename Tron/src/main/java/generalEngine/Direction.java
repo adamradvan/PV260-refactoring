@@ -3,7 +3,7 @@ package generalEngine;
 import tronModule.Position;
 import tronModule.ScreenParameters;
 
-import static tronModule.TronGameConfiguration.MOVE_AMOUNT;
+import static tronModule.config.TronGameConfiguration.MOVE_AMOUNT;
 
 public enum Direction {
     UP {

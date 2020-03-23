@@ -55,7 +55,7 @@ public abstract class Engine implements ListenerManager {
         while (running) {
             presentationGraphics.onUpdateGraphics(gameObjects);
             checkCollisions();
-            for(GameObject gameObject : gameObjects) {
+            for (GameObject gameObject : gameObjects) {
                 gameObject.makeMove(pressedKey);
             }
             screenManager.update();
@@ -71,7 +71,7 @@ public abstract class Engine implements ListenerManager {
     public void startGame() {
         running = true;
     }
-    
+
     public void stopGame() {
         running = false;
     }
@@ -87,6 +87,11 @@ public abstract class Engine implements ListenerManager {
      @Override
     public void keyPressed(KeyEvent event) {
         pressedKey = event.getKeyCode();
+
+        if (pressedKey == KeyEvent.VK_ESCAPE) {
+            System.out.println("User input: ESCAPE, closing the game");
+            System.exit(0);
+        }
     }
 
     @Override

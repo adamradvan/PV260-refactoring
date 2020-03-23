@@ -1,17 +1,13 @@
 package tronPresentation;
 
 import generalEngine.GameObject;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Window;
-import java.awt.image.BufferedImage;
-import java.util.List;
 import tronModule.GraphicsCallBack;
 import tronModule.ScreenParameters;
 import tronModule.TronEngine;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Presentation implements GraphicsCallBack{
     TronEngine tronEngine;
@@ -41,8 +37,8 @@ public class Presentation implements GraphicsCallBack{
     @Override
     public void onUpdateGraphics(List<GameObject> gameObjects) {
         graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, ScreenParameters.getInstance().width, ScreenParameters.getInstance().width);
-        for(GameObject gameObject : gameObjects) {
+        graphics.fillRect(0, 0, ScreenParameters.getInstance().width, ScreenParameters.getInstance().height);
+        for (GameObject gameObject : gameObjects) {
             gameObject.drawObject(graphics);
         }
     }

@@ -1,49 +1,33 @@
 package tronModule;
 
-import generalEngine.Controls;
-import generalEngine.Direction;
 import generalEngine.Engine;
-import generalEngine.GameObject;
+import tronModule.config.PlayersConfiguration;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TronEngine extends Engine {
-    
-    
+
+
     public TronEngine(GraphicsCallBack graphicsInterface) {
         super(graphicsInterface);
-    }   
+    }
 
-    Bike player1 = new Bike(Color.green,
-            new Controls(TronGameConfiguration.PLAYER_1_CONTROLS[0],
-                    TronGameConfiguration.PLAYER_1_CONTROLS[1],
-                    TronGameConfiguration.PLAYER_1_CONTROLS[2],
-                    TronGameConfiguration.PLAYER_1_CONTROLS[3]),
-            new Position(40, 40),
-            Direction.RIGHT);
 
-    Bike player2 = new Bike(Color.red,
-            new Controls(TronGameConfiguration.PLAYER_2_CONTROLS[0],
-                    TronGameConfiguration.PLAYER_2_CONTROLS[1],
-                    TronGameConfiguration.PLAYER_2_CONTROLS[2],
-                    TronGameConfiguration.PLAYER_2_CONTROLS[3]),
-            new Position(600, 440),
-            Direction.LEFT);
-              
-    List<GameObject> playerObjects = List.of(player1, player2);
-    List<Bike> players = List.of(player1, player2);
+    List<Bike> players = Arrays.stream(PlayersConfiguration.values())
+            .map(PlayersConfiguration::toBikeObject)
+            .collect(Collectors.toList());
 
-   
     public void startTronEngine() {
         try {
-            loadObjects(playerObjects);
+            loadObjects(new ArrayList<>(players));
             startGame();
             gameLoop();
         } finally {
             screenManager.restoreScreen();
-        }        
+        }
     }
     
     private void checkForPlayersCollisions() {
