@@ -8,8 +8,7 @@ public class ScreenParameters {
   
     private ScreenParameters() {}
    
-    public static ScreenParameters getInstance() 
-    { 
+    public static ScreenParameters getInstance() {
         if (screenParameters == null) 
             screenParameters = new ScreenParameters(); 
   

@@ -38,7 +38,7 @@ public abstract class Engine implements ListenerManager {
         screenManager.setFullScreen(displayMode);
         screenParameters.height = screenManager.getHeight();
         screenParameters.width = screenManager.getWidth();
-    }    
+    }
     
     protected void loadObjects(List<GameObject> gameObjects) {
         this.gameObjects = gameObjects;

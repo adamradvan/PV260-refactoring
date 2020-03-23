@@ -41,46 +41,16 @@ public class Bike implements GameObject{
     }
 
     private Direction findDirectionOfEvent(int command) {
-        if (command == controls.getUp()) {
-            return Direction.UP;
-        } else if (command == controls.getDown()) {
-            return Direction.DOWN;
-        } else if (command == controls.getRight()) {
-            return Direction.RIGHT;
-        } else if (command == controls.getLeft()) {
-            return Direction.LEFT;
-        }
-        return currentDirection;
+        Direction direction =  controls.getDirectionFor(command);
+        if (direction == null) return currentDirection;
+        return direction;
     }
-    
-    
-    
+
      protected void findDirectionOfNextMove(Direction directionCommand) {
-        switch(directionCommand) {
-            case UP:
-                if (!Direction.DOWN.equals(currentDirection)) {
-                    nextDirection = Direction.UP;
-                }
-                break;
-            case DOWN:
-                if (!currentDirection.equals(Direction.UP)) {
-                    nextDirection = Direction.DOWN;
-                }
-                break;
-            case RIGHT:
-                if (!currentDirection.equals(Direction.LEFT)) {
-                    nextDirection = Direction.RIGHT;
-                }
-                break;
-            case LEFT:
-                if (!currentDirection.equals(Direction.RIGHT)) {
-                    nextDirection = Direction.LEFT;
-                }
-                break;
-            default:
-                break;
-        }
+        nextDirection = directionCommand.checkNextMoveDirection(currentDirection);
     }
+
+
     //TODO: refactor this method to remove screen overflows
     protected void computeNextPosition() {
         switch (nextDirection) {
@@ -125,7 +95,7 @@ public class Bike implements GameObject{
     }
 
     @Override
-    public void onColision(GameObject gameObject) {
+    public void onCollision(GameObject gameObject) {
         
     }
 
