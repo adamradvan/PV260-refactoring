@@ -1,0 +1,171 @@
+package tronModule;
+
+import generalEngine.Controls;
+import generalEngine.Direction;
+import generalEngine.GameObject;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+
+public class Bike implements GameObject{
+    private int moveAmount;
+    private Controls controls;
+    private Color color;
+    private Position currentPosition;
+    private Position nextPosition;
+    private Direction currentDirection;
+    private Direction nextDirection;
+    private GameConfiguration.GameObjectType type = GameConfiguration.GameObjectType.Bike;  
+    private ArrayList<Position> bikePath = new ArrayList<>();
+    
+    public Bike(int moveAmount,
+                Color color,
+                Controls controls,
+                Position initialPosition,
+                Direction initialDirection) {        
+        this.moveAmount = moveAmount;
+        this.controls = controls;
+        this.color = color;
+        this.currentPosition = initialPosition;
+        this.currentDirection = initialDirection;        
+    }
+
+    @Override
+    public void makeMove(int directionCommand) {
+        Direction command = findDirectionOfEvent(directionCommand);
+        findDirectionOfNextMove(command);
+        computeNextPosition();
+        addNextPositionToPath();
+        currentDirection = nextDirection;
+        currentPosition = nextPosition;
+    }
+
+    private Direction findDirectionOfEvent(int command) {
+        if (command == controls.getUp()) {
+            return Direction.UP;
+        } else if (command == controls.getDown()) {
+            return Direction.DOWN;
+        } else if (command == controls.getRight()) {
+            return Direction.RIGHT;
+        } else if (command == controls.getLeft()) {
+            return Direction.LEFT;
+        }
+        return currentDirection;
+    }
+    
+    
+    
+     protected void findDirectionOfNextMove(Direction directionCommand) {
+        switch(directionCommand) {
+            case UP:
+                if (!Direction.DOWN.equals(currentDirection)) {
+                    nextDirection = Direction.UP;
+                }
+                break;
+            case DOWN:
+                if (!currentDirection.equals(Direction.UP)) {
+                    nextDirection = Direction.DOWN;
+                }
+                break;
+            case RIGHT:
+                if (!currentDirection.equals(Direction.LEFT)) {
+                    nextDirection = Direction.RIGHT;
+                }
+                break;
+            case LEFT:
+                if (!currentDirection.equals(Direction.RIGHT)) {
+                    nextDirection = Direction.LEFT;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    //TODO: refactor this method to remove screen overflows
+    protected void computeNextPosition() {
+        switch (nextDirection) {
+            case UP:
+                if (currentPosition.getAxisY() > 0) {
+                    nextPosition = new Position(currentPosition.getAxisX(),
+                                                   currentPosition.getAxisY() - moveAmount);
+                } else {
+                    nextPosition = new Position(currentPosition.getAxisX(),
+                                                   ScreenParameters.getInstance().height);
+                }
+                break;
+            case DOWN:
+                if (currentPosition.getAxisY() < ScreenParameters.getInstance().height) {
+                    nextPosition = new Position(currentPosition.getAxisX(),
+                                                   currentPosition.getAxisY() + moveAmount);
+                } else {
+                    nextPosition = new Position(currentPosition.getAxisX(), 0);
+                }
+                break;
+            case RIGHT:
+                if (currentPosition.getAxisX() < ScreenParameters.getInstance().width) {
+                    nextPosition = new Position(currentPosition.getAxisX() + moveAmount,
+                                                   currentPosition.getAxisY());
+                } else {
+                    nextPosition = new Position(0, currentPosition.getAxisY());
+                }
+                break;
+            case LEFT:
+                if (currentPosition.getAxisX() > 0) {
+                    nextPosition = new Position(currentPosition.getAxisX() - moveAmount,
+                                                   currentPosition.getAxisY());
+                } else {
+                    nextPosition = new Position(ScreenParameters.getInstance().width,
+                                                   currentPosition.getAxisY());
+                }
+                break;
+            default:
+                nextPosition = null;
+                break;
+        }
+    }
+
+    @Override
+    public void onColision(GameObject gameObject) {
+        
+    }
+
+    @Override
+    public GameConfiguration.GameObjectType getType() {
+        return type;
+    }
+    
+    @Override
+    public void drawObject(Graphics2D graphics) {
+        for (Position position : bikePath) {
+            graphics.setColor(color);
+            graphics.fillRect(position.getAxisX(), position.getAxisY(), 5, 5);
+        }
+    }
+    
+    private void addNextPositionToPath() {
+        bikePath.add(nextPosition);
+    }
+    
+    public ArrayList<Position> getBikePath() {
+        return bikePath;
+    }
+    
+    public Position getCurrentPosition() {
+        return currentPosition;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+   

@@ -1,8 +1,10 @@
-package tron;
+package tronModule;
 
 import java.awt.event.KeyEvent;
 
 public class GameConfiguration {
+    public static enum GameObjectType{ Bike };
+    public static final int MOVE_AMOUNT = 5;
     public static final int NUMBER_OF_PLAYERS = 2;
 
     public static final int[] PLAYER_1_CONTROLS = {

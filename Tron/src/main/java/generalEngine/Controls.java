@@ -1,10 +1,10 @@
-package tron;
+package generalEngine;
 
 public class Controls {
-    private int up;
-    private int down;
-    private int right;
-    private int left;
+    private final int up;
+    private final int down;
+    private final int right;
+    private final int left;
 
     public Controls(int up, int down, int right, int left) {
         this.up = up;

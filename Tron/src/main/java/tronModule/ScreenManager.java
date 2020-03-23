@@ -1,4 +1,4 @@
-package tron;
+package tronModule;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,10 +7,14 @@ import java.awt.image.BufferStrategy;
 public class ScreenManager {
 
     private GraphicsDevice screen;
+    private ScreenParameters screenParameters;
 
     public ScreenManager() {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         screen = graphicsEnvironment.getDefaultScreenDevice();
+        screenParameters = ScreenParameters.getInstance();
+        screenParameters.width = getWidth();
+        screenParameters.height = getHeight();
     }
 
     public DisplayMode findFirstCompatibleMode(DisplayMode[] modes) {

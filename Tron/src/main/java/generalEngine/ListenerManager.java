@@ -1,25 +1,24 @@
-package tron;
+package generalEngine;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public interface GeneralListener extends KeyListener, MouseListener {
+public interface ListenerManager extends KeyListener, MouseListener {
 
     @Override
     void keyPressed(KeyEvent e);
 
+    @Override
+    void mouseClicked(MouseEvent e);
+    
     @Override
     default void keyTyped(KeyEvent e) {
     }
 
     @Override
     default void keyReleased(KeyEvent e) {
-    }
-
-    @Override
-    default void mouseClicked(MouseEvent e) {
     }
 
     @Override

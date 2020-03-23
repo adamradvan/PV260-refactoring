@@ -1,4 +1,4 @@
-package tron;
+package tronModule;
 
 public class Position {
     private int axisX;
