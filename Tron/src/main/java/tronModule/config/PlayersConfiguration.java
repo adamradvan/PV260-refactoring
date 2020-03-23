@@ -1,12 +1,15 @@
 package tronModule.config;
 
-import generalEngine.Controls;
 import generalEngine.Direction;
+import generalEngine.controls.Controls;
+import generalEngine.controls.KeyboardControls;
+import generalEngine.controls.MouseControls;
 import tronModule.Bike;
 import tronModule.Position;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public enum PlayersConfiguration {
     PLAYER_1(
@@ -20,14 +23,20 @@ public enum PlayersConfiguration {
             PlayerControls.PLAYER_2_CONTROLS,
             new Position(600, 440),
             Direction.LEFT
+    ),
+    PLAYER_3(
+            Color.YELLOW,
+            PlayerControls.PLAYER_3_CONTROLS,
+            new Position(200, 600),
+            Direction.DOWN
     );
 
     private Color color;
-    private int[] controls;
+    private Controls controls;
     private Position startingPosition;
     private Direction startingDirection;
 
-    PlayersConfiguration(Color color, int[] controls, Position startingPosition, Direction startingDirection) {
+    PlayersConfiguration(Color color, Controls controls, Position startingPosition, Direction startingDirection) {
         this.color = color;
         this.controls = controls;
         this.startingPosition = startingPosition;
@@ -35,22 +44,29 @@ public enum PlayersConfiguration {
     }
 
     public Bike toBikeObject() {
-        return new Bike(color, new Controls(controls), startingPosition, startingDirection);
+        return new Bike(color, controls, startingPosition, startingDirection);
     }
 
 
     private static class PlayerControls {
-        public static final int[] PLAYER_1_CONTROLS = {
+        private static final Controls PLAYER_1_CONTROLS = new KeyboardControls(new int[]{
                 KeyEvent.VK_UP,
                 KeyEvent.VK_DOWN,
                 KeyEvent.VK_RIGHT,
-                KeyEvent.VK_LEFT};
+                KeyEvent.VK_LEFT
+        });
 
-        public static final int[] PLAYER_2_CONTROLS = {
+        private static final Controls PLAYER_2_CONTROLS = new KeyboardControls(new int[]{
                 KeyEvent.VK_W,
                 KeyEvent.VK_S,
                 KeyEvent.VK_D,
-                KeyEvent.VK_A};
+                KeyEvent.VK_A
+        });
+
+        private static final Controls PLAYER_3_CONTROLS = new MouseControls(new int[]{
+                MouseEvent.BUTTON1,
+                MouseEvent.BUTTON3
+        });
     }
 
 }

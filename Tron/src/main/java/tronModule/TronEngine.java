@@ -23,6 +23,7 @@ public class TronEngine extends Engine {
     public void startTronEngine() {
         try {
             loadObjects(new ArrayList<>(players));
+            loadPlayableObjects(new ArrayList<>(players));
             startGame();
             gameLoop();
         } finally {

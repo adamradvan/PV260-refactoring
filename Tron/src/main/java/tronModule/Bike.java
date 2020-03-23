@@ -1,8 +1,9 @@
 package tronModule;
 
-import generalEngine.Controls;
 import generalEngine.Direction;
 import generalEngine.GameObject;
+import generalEngine.PlayableGameObject;
+import generalEngine.controls.Controls;
 import tronModule.config.TronGameConfiguration;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static tronModule.config.TronGameConfiguration.MOVE_AMOUNT;
 
-public class Bike implements GameObject {
+public class Bike implements PlayableGameObject {
     private static final TronGameConfiguration.GameObjectType GAME_OBJECT_TYPE = TronGameConfiguration.GameObjectType.BIKE;
 
     private Controls controls;
@@ -21,6 +22,8 @@ public class Bike implements GameObject {
     private Direction currentDirection;
     private Direction nextDirection;
     private List<Position> bikePath = new ArrayList<>();
+    private boolean parsedLatestInput = false;
+    private int inputEvent;
 
     public Bike(
             Color color,
@@ -34,40 +37,42 @@ public class Bike implements GameObject {
     }
 
     @Override
-    public void makeMove(int directionCommand) {
-        Direction command = findDirectionOfEvent(directionCommand);
-        findDirectionOfNextMove(command);
-        computeNextPosition();
-        addNextPositionToPath();
+    public void assignFromNextToCurrent() {
         currentDirection = nextDirection;
         currentPosition = nextPosition;
     }
 
-    private Direction findDirectionOfEvent(int command) {
-        Direction direction =  controls.getDirectionFor(command);
-        if (direction == null) return currentDirection;
-        return direction;
+    @Override
+    public void computeNextDirection() {
+        if (!parsedLatestInput) {
+            nextDirection = controls.obtainNewDirectionFromEvent(inputEvent, currentDirection);
+            parsedLatestInput = true;
+        } else
+            nextDirection = currentDirection;
     }
 
-    private void findDirectionOfNextMove(Direction directionCommand) {
-        nextDirection = directionCommand.checkNextMoveDirection(currentDirection);
+    @Override
+    public void inputEventCallback(int pressedKey) {
+        inputEvent = pressedKey;
+        parsedLatestInput = false;
     }
 
-
-    private void computeNextPosition() {
+    @Override
+    public void computeNextPosition() {
         if (nextDirection.isNextPositionInScreenScope(currentPosition)) {
             nextPosition = nextDirection.newPositionInsideScreenScope(currentPosition);
         } else
             nextPosition = nextDirection.newPositionAtScreenBeginning(currentPosition);
     }
 
-    private void addNextPositionToPath() {
+    @Override
+    public void addNextPositionToHistory() {
         bikePath.add(nextPosition);
     }
 
     @Override
     public void onCollision(GameObject gameObject) {
-
+        // todo
     }
 
     @Override

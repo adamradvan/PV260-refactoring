@@ -8,7 +8,7 @@ import static tronModule.config.TronGameConfiguration.MOVE_AMOUNT;
 public enum Direction {
     UP {
         @Override
-        public Direction checkNextMoveDirection(Direction currentDirection) {
+        public Direction validatedFor(Direction currentDirection) {
             if (currentDirection.equals(DOWN)) return currentDirection;
             return UP;
         }
@@ -31,7 +31,7 @@ public enum Direction {
     },
     DOWN {
         @Override
-        public Direction checkNextMoveDirection(Direction currentDirection) {
+        public Direction validatedFor(Direction currentDirection) {
             if (currentDirection.equals(UP)) return currentDirection;
             return DOWN;
         }
@@ -55,7 +55,7 @@ public enum Direction {
     },
     RIGHT {
         @Override
-        public Direction checkNextMoveDirection(Direction currentDirection) {
+        public Direction validatedFor(Direction currentDirection) {
             if (currentDirection.equals(LEFT)) return currentDirection;
             return RIGHT;
         }
@@ -77,7 +77,7 @@ public enum Direction {
     },
     LEFT {
         @Override
-        public Direction checkNextMoveDirection(Direction currentDirection) {
+        public Direction validatedFor(Direction currentDirection) {
             if (currentDirection.equals(RIGHT)) return currentDirection;
             return LEFT;
         }
@@ -98,7 +98,7 @@ public enum Direction {
         }
     };
 
-    public abstract Direction checkNextMoveDirection(Direction currentDirection);
+    public abstract Direction validatedFor(Direction currentDirection);
 
     public abstract boolean isNextPositionInScreenScope(Position currentPosition);
 
