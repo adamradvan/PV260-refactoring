@@ -9,8 +9,7 @@ public enum Direction {
     UP {
         @Override
         public Direction validatedFor(Direction currentDirection) {
-            if (currentDirection.equals(DOWN)) return currentDirection;
-            return UP;
+            return (currentDirection.equals(DOWN)) ? currentDirection : UP;
         }
 
         @Override
@@ -32,8 +31,7 @@ public enum Direction {
     DOWN {
         @Override
         public Direction validatedFor(Direction currentDirection) {
-            if (currentDirection.equals(UP)) return currentDirection;
-            return DOWN;
+            return (currentDirection.equals(UP)) ? currentDirection : DOWN;
         }
 
         @Override
@@ -56,8 +54,7 @@ public enum Direction {
     RIGHT {
         @Override
         public Direction validatedFor(Direction currentDirection) {
-            if (currentDirection.equals(LEFT)) return currentDirection;
-            return RIGHT;
+            return (currentDirection.equals(LEFT)) ? currentDirection : RIGHT;
         }
 
         @Override
@@ -78,8 +75,7 @@ public enum Direction {
     LEFT {
         @Override
         public Direction validatedFor(Direction currentDirection) {
-            if (currentDirection.equals(RIGHT)) return currentDirection;
-            return LEFT;
+            return (currentDirection.equals(RIGHT)) ? currentDirection : LEFT;
         }
 
         @Override

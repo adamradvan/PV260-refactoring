@@ -9,17 +9,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TronEngine extends Engine {
-
-
-    public TronEngine(GraphicsCallBack graphicsInterface) {
-        super(graphicsInterface);
-    }
-
-
     List<Bike> players = Arrays.stream(PlayersConfiguration.values())
             .map(PlayersConfiguration::toBikeObject)
             .collect(Collectors.toList());
-
+    
+    public TronEngine(GraphicsCallBack graphicsInterface) {
+        super(graphicsInterface);
+    }
+    
     public void startTronEngine() {
         try {
             loadObjects(new ArrayList<>(players));

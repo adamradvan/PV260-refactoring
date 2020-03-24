@@ -22,8 +22,8 @@ public class KeyboardControls implements Controls {
     public Direction obtainNewDirectionFromEvent(int eventCommand, Direction currentDirection) {
         System.out.println(String.format("KeyEvent: %s, currDir: %s", eventCommand, currentDirection));
         Direction newDirection = mappedDirections.get(eventCommand);
-        if (newDirection == null) return currentDirection;
-        return newDirection.validatedFor(currentDirection);
+        
+        return (newDirection == null) ? currentDirection : newDirection.validatedFor(currentDirection);
     }
 
 }
