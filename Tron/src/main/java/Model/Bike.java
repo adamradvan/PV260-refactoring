@@ -70,7 +70,7 @@ public class Bike implements PlayableGameObject {
     }
 
     @Override
-    public void onCollision(GameObject gameObject) {
+    public void onCollision() {
         // todo
     }
 

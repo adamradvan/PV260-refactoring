@@ -12,7 +12,7 @@ public abstract class Engine implements ListenerManager {
     private final Window window;
     private List<GameObject> gameObjects;
     private List<PlayableGameObject> playableGameObjects;
-    private final GraphicsCallBack presentationGraphics;
+    private final GraphicsCallback presentationGraphics;
     protected ScreenManager screenManager = new ScreenManager();
     protected ScreenParameters screenParameters = ScreenParameters.getInstance();
     private int pressedKey;
@@ -31,7 +31,7 @@ public abstract class Engine implements ListenerManager {
                     new DisplayMode(640, 480, 16, 0),
             };
 
-    protected Engine(GraphicsCallBack graphicsInterface) {
+    protected Engine(GraphicsCallback graphicsInterface) {
         this.presentationGraphics = graphicsInterface;
         DisplayMode displayMode = screenManager.findFirstCompatibleMode(modes);
         screenManager.setFullScreen(displayMode);
@@ -56,7 +56,7 @@ public abstract class Engine implements ListenerManager {
         //todo:
     }
 
-    public void gameLoop() {
+    protected void gameLoop() {
         while (running) {
             presentationGraphics.onUpdateGraphics(gameObjects);
             checkCollisions();
@@ -73,11 +73,11 @@ public abstract class Engine implements ListenerManager {
         }
     }
 
-    public void startGame() {
+    protected void startGame() {
         running = true;
     }
 
-    public void stopGame() {
+    protected void stopGame() {
         running = false;
     }
     

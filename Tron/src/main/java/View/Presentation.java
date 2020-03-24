@@ -1,15 +1,15 @@
 package View;
 
 import Core.GameObject;
-import Core.GraphicsCallBack;
 import Core.ScreenParameters;
 import Model.TronEngine;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import Core.GraphicsCallback;
 
-public class Presentation implements GraphicsCallBack{
+public class Presentation implements GraphicsCallback{
     TronEngine tronEngine;
     Graphics2D graphics;
         

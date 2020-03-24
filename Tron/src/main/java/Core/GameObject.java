@@ -12,6 +12,6 @@ public interface GameObject {
 
     void makeMove();
 
-    void onCollision(GameObject gameObject);
+    void onCollision();
 
 }
