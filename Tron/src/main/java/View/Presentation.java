@@ -20,7 +20,7 @@ public class Presentation implements GraphicsCallback{
         System.exit(0);
     }
     
-    public void initializeTronEngine() {
+    private void initializeTronEngine() {
         tronEngine = new TronEngine(this);
         tronEngine.createWindow(new Font("Arial", Font.PLAIN, 20),
                                 Color.WHITE,

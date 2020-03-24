@@ -3,7 +3,7 @@ package Model;
 import Core.Direction;
 import Core.Controls;
 import Core.KeyboardControls;
-import Core.MouseControls;
+import Core.MouseControls;  
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

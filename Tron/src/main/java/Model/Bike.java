@@ -24,11 +24,10 @@ public class Bike implements PlayableGameObject {
     private boolean parsedLatestInput = false;
     private int inputEvent;
 
-    public Bike(
-            Color color,
-            Controls controls,
-            Position initialPosition,
-            Direction initialDirection) {
+    public Bike( Color color,
+                 Controls controls,
+                 Position initialPosition,
+                 Direction initialDirection) {
         this.color = color;
         this.controls = controls;
         this.currentPosition = initialPosition;
