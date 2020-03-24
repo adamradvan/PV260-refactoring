@@ -1,6 +1,7 @@
-package generalEngine.controls;
+package Core;
 
-import generalEngine.Direction;
+import Core.Controls;
+import Core.Direction;
 
 import java.util.Map;
 

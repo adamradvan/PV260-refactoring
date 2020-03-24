@@ -1,7 +1,7 @@
-package tronModule;
+package Model;
 
-import generalEngine.Engine;
-import tronModule.config.PlayersConfiguration;
+import Core.GraphicsCallBack;
+import Core.Engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;

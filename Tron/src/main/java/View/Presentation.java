@@ -1,9 +1,9 @@
-package tronPresentation;
+package View;
 
-import generalEngine.GameObject;
-import tronModule.GraphicsCallBack;
-import tronModule.ScreenParameters;
-import tronModule.TronEngine;
+import Core.GameObject;
+import Core.GraphicsCallBack;
+import Core.ScreenParameters;
+import Model.TronEngine;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,24 +14,18 @@ public class Presentation implements GraphicsCallBack{
     Graphics2D graphics;
         
     public void run() {      
-        tronEngine = new TronEngine(this);
-        init();               
-        graphics = tronEngine.getGraphics();
+        initializeTronEngine();
         tronEngine.startTronEngine();
         graphics.dispose();
         System.exit(0);
     }
     
-    private void init() {
-        Window window = tronEngine.getFullScreenWindow();
-        window.setFont(new Font("Arial", Font.PLAIN, 20));
-        window.setBackground(Color.WHITE);
-        window.setForeground(Color.RED);
-        window.addKeyListener(tronEngine);
-        window.addMouseListener(tronEngine);
-
-        Cursor cursor = window.getToolkit().createCustomCursor(new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "null");
-        window.setCursor(cursor);
+    public void initializeTronEngine() {
+        tronEngine = new TronEngine(this);
+        tronEngine.createWindow(new Font("Arial", Font.PLAIN, 20),
+                                Color.WHITE,
+                                Color.RED);
+        graphics = tronEngine.getGraphics();
     }
 
     @Override

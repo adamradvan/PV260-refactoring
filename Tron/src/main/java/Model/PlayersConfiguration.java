@@ -1,11 +1,9 @@
-package tronModule.config;
+package Model;
 
-import generalEngine.Direction;
-import generalEngine.controls.Controls;
-import generalEngine.controls.KeyboardControls;
-import generalEngine.controls.MouseControls;
-import tronModule.Bike;
-import tronModule.Position;
+import Core.Direction;
+import Core.Controls;
+import Core.KeyboardControls;
+import Core.MouseControls;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -47,7 +45,6 @@ public enum PlayersConfiguration {
         return new Bike(color, controls, startingPosition, startingDirection);
     }
 
-
     private static class PlayerControls {
         private static final Controls PLAYER_1_CONTROLS = new KeyboardControls(new int[]{
                 KeyEvent.VK_UP,
@@ -68,5 +65,4 @@ public enum PlayersConfiguration {
                 MouseEvent.BUTTON3
         });
     }
-
 }

@@ -1,4 +1,4 @@
-package tronModule.config;
+package Model;
 
 public class TronGameConfiguration {
 

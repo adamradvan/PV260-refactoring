@@ -1,6 +1,6 @@
-package generalEngine.controls;
+package Core;
 
-import generalEngine.Direction;
+import Core.Direction;
 
 public interface Controls {
 

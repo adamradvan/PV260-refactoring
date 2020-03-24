@@ -1,6 +1,6 @@
-package generalEngine;
+package Core;
 
-import tronModule.config.TronGameConfiguration;
+import Model.TronGameConfiguration;
 
 import java.awt.*;
 

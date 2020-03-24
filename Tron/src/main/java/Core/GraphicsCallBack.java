@@ -1,6 +1,6 @@
-package tronModule;
+package Core;
 
-import generalEngine.GameObject;
+import Core.GameObject;
 import java.util.List;
 
 public interface GraphicsCallBack {

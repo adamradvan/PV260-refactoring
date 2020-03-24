@@ -1,11 +1,12 @@
-package generalEngine.controls;
+package Core;
 
-import generalEngine.Direction;
+import Core.Controls;
+import Core.Direction;
 
 import java.util.List;
 import java.util.Map;
 
-import static generalEngine.Direction.*;
+import static Core.Direction.*;
 
 public class MouseControls implements Controls {
 
@@ -32,7 +33,9 @@ public class MouseControls implements Controls {
     public Direction obtainNewDirectionFromEvent(int eventCommand, Direction currentDirection) {
         System.out.println(String.format("click: %s, currDir: %s", eventCommand, currentDirection));
         Integer indexOfNeighbour = mappedIndexes.get(eventCommand);
-        if (indexOfNeighbour == null) return currentDirection;
-        return neighbouringDirections.get(currentDirection).get(indexOfNeighbour);
+        
+        return (indexOfNeighbour == null) ? currentDirection : 
+                                            neighbouringDirections.get(currentDirection).get(indexOfNeighbour);
+  
     }
 }

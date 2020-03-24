@@ -1,4 +1,4 @@
-package tronModule;
+package Core;
 
 public class ScreenParameters {
     private static ScreenParameters screenParameters = null; 

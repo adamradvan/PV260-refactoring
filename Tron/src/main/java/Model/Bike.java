@@ -1,16 +1,15 @@
-package tronModule;
+package Model;
 
-import generalEngine.Direction;
-import generalEngine.GameObject;
-import generalEngine.PlayableGameObject;
-import generalEngine.controls.Controls;
-import tronModule.config.TronGameConfiguration;
+import Core.Direction;
+import Core.GameObject;
+import Core.PlayableGameObject;
+import Core.Controls;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static tronModule.config.TronGameConfiguration.MOVE_AMOUNT;
+import static Model.TronGameConfiguration.MOVE_AMOUNT;
 
 public class Bike implements PlayableGameObject {
     private static final TronGameConfiguration.GameObjectType GAME_OBJECT_TYPE = TronGameConfiguration.GameObjectType.BIKE;

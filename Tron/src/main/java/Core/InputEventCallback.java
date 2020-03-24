@@ -1,4 +1,4 @@
-package generalEngine;
+package Core;
 
 public interface InputEventCallback {
 

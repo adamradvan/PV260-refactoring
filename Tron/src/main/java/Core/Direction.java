@@ -1,9 +1,8 @@
-package generalEngine;
+package Core;
 
-import tronModule.Position;
-import tronModule.ScreenParameters;
+import Model.Position;
 
-import static tronModule.config.TronGameConfiguration.MOVE_AMOUNT;
+import static Model.TronGameConfiguration.MOVE_AMOUNT;
 
 public enum Direction {
     UP {

@@ -1,5 +1,6 @@
-package tronModule;
+package Core;
 
+import Core.ScreenParameters;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -90,20 +91,11 @@ public class ScreenManager {
 
     public int getWidth() {
         Window window = screen.getFullScreenWindow();
-        if (window != null) {
-            return window.getWidth();
-        } else {
-            return 0;
-        }
+        return (window != null) ? window.getWidth() : 0;
     }
 
     public int getHeight() {
         Window window = screen.getFullScreenWindow();
-        if (window != null) {
-            return window.getHeight();
-        } else {
-            return 0;
-        }
+        return (window != null) ? window.getHeight() : 0;
     }
-
 }

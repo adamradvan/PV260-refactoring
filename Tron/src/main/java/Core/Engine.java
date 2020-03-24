@@ -1,19 +1,18 @@
-package generalEngine;
+package Core;
 
-import tronModule.GraphicsCallBack;
-import tronModule.ScreenManager;
-import tronModule.ScreenParameters;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 
 public abstract class Engine implements ListenerManager {
+    private final Window window;
     private List<GameObject> gameObjects;
     private List<PlayableGameObject> playableGameObjects;
-    private GraphicsCallBack presentationGraphics;
+    private final GraphicsCallBack presentationGraphics;
     protected ScreenManager screenManager = new ScreenManager();
     protected ScreenParameters screenParameters = ScreenParameters.getInstance();
     private int pressedKey;
@@ -38,6 +37,7 @@ public abstract class Engine implements ListenerManager {
         screenManager.setFullScreen(displayMode);
         screenParameters.height = screenManager.getHeight();
         screenParameters.width = screenManager.getWidth();
+        window = screenManager.getFullScreenWindow();
     }
 
     protected void loadObjects(List<GameObject> gameObjects) {
@@ -84,10 +84,6 @@ public abstract class Engine implements ListenerManager {
     public Graphics2D getGraphics() {
         return screenManager.getGraphics();
     }
-    
-    public Window getFullScreenWindow() {
-        return screenManager.getFullScreenWindow();
-    }
 
     @Override
     public void keyPressed(KeyEvent event) {
@@ -111,6 +107,16 @@ public abstract class Engine implements ListenerManager {
             playable.inputEventCallback(pressedKey);
         }
     }
-
+    
+    public void createWindow(Font font, Color backgroundCcolor, Color foregroundColor) {
+        window.setFont(font);
+        window.setBackground(backgroundCcolor);
+        window.setForeground(foregroundColor);
+        window.addKeyListener(this);
+        window.addMouseListener(this);
+        Cursor cursor = window.getToolkit().createCustomCursor(new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "null");
+        window.setCursor(cursor);
+    }
+    
     public abstract void checkCollisions();
 }
