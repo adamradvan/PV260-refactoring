@@ -1,8 +1,5 @@
 package Core;
 
-import Core.Controls;
-import Core.Direction;
-
 import java.util.Map;
 
 public class KeyboardControls implements Controls {
@@ -23,7 +20,7 @@ public class KeyboardControls implements Controls {
     public Direction obtainNewDirectionFromEvent(int eventCommand, Direction currentDirection) {
         System.out.println(String.format("KeyEvent: %s, currDir: %s", eventCommand, currentDirection));
         Direction newDirection = mappedDirections.get(eventCommand);
-        
+
         return (newDirection == null) ? currentDirection : newDirection.validatedFor(currentDirection);
     }
 

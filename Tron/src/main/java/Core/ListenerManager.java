@@ -12,7 +12,7 @@ public interface ListenerManager extends KeyListener, MouseListener {
 
     @Override
     void mouseClicked(MouseEvent e);
-    
+
     @Override
     default void keyTyped(KeyEvent e) {
     }

@@ -1,31 +1,24 @@
 package View;
 
+import Core.Engine;
 import Core.GameObject;
+import Core.GraphicsCallBack;
 import Core.ScreenParameters;
 import Model.TronEngine;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.List;
-import Core.GraphicsCallback;
 
-public class Presentation implements GraphicsCallback{
-    TronEngine tronEngine;
+public class Presentation implements GraphicsCallBack {
+    Engine tronEngine;
     Graphics2D graphics;
-        
-    public void run() {      
-        initializeTronEngine();
-        tronEngine.startTronEngine();
+
+    public void run() {
+        tronEngine = new TronEngine(this);
+        graphics = tronEngine.getGraphics();
+        tronEngine.startEngine();
         graphics.dispose();
         System.exit(0);
-    }
-    
-    private void initializeTronEngine() {
-        tronEngine = new TronEngine(this);
-        tronEngine.createWindow(new Font("Arial", Font.PLAIN, 20),
-                                Color.WHITE,
-                                Color.RED);
-        graphics = tronEngine.getGraphics();
     }
 
     @Override
