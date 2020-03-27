@@ -1,4 +1,6 @@
-package Core;
+package Core.models;
+
+import Core.InputEventCallback;
 
 public interface PlayableGameObject extends GameObject, InputEventCallback {
 

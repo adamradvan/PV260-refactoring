@@ -1,6 +1,9 @@
 package Core;
 
 
+import Core.models.GameObject;
+import Core.models.PlayableGameObject;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;

@@ -1,9 +1,9 @@
 package Model;
 
-import Core.Controls;
+import Core.controls.Controls;
 import Core.Direction;
-import Core.KeyboardControls;
-import Core.MouseControls;
+import Core.controls.KeyboardControls;
+import Core.controls.MouseControls;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

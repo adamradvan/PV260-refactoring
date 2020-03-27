@@ -1,5 +1,7 @@
 package Core;
 
+import Core.models.GameObject;
+
 import java.util.List;
 
 public interface GraphicsCallBack {

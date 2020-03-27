@@ -1,4 +1,7 @@
-package Core;
+package Core.controls;
+
+import Core.Direction;
+import Core.controls.Controls;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,6 @@
-package Core;
+package Core.controls;
+
+import Core.Direction;
 
 public interface Controls {
 

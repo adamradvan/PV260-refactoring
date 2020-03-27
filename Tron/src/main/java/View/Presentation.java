@@ -1,7 +1,7 @@
 package View;
 
 import Core.Engine;
-import Core.GameObject;
+import Core.models.GameObject;
 import Core.GraphicsCallBack;
 import Core.ScreenParameters;
 import Model.TronEngine;

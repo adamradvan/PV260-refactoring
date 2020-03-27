@@ -1,9 +1,9 @@
 package Model;
 
 import Core.Engine;
-import Core.GameObject;
+import Core.models.GameObject;
 import Core.GraphicsCallBack;
-import Core.PlayableGameObject;
+import Core.models.PlayableGameObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +29,11 @@ public class TronEngine extends Engine {
         return new ArrayList<>(players);
     }
 
+    @Override
+    public void checkCollisions() {
+        checkForPlayersCollisions();
+    }
+
     private void checkForPlayersCollisions() {
         for (Bike player : players) {
             checkPlayerPath(player);
@@ -39,7 +44,7 @@ public class TronEngine extends Engine {
     private void checkOthersPath(Bike player) {
         List<Bike> others = players.stream().filter(p -> !p.equals(player)).collect(Collectors.toList());
         for (Bike otherPlayer : others) {
-            for (Position positionOfOther : otherPlayer.getBikePath()) {
+            for (Position positionOfOther : otherPlayer.getPositionHistory()) {
                 if (positionOfOther.equals(player.getCurrentPosition())) {
                     System.out.println(player + " hit other " + otherPlayer);
                     stopGame();
@@ -49,7 +54,7 @@ public class TronEngine extends Engine {
     }
 
     private void checkPlayerPath(Bike player) {
-        for (Position playerHistoryPosition : player.getBikePath()) {
+        for (Position playerHistoryPosition : player.getPositionHistory()) {
             if (playerHistoryPosition.equals(player.getCurrentPosition()) && playerHistoryPosition != player.getCurrentPosition()) {
                 System.out.println(player + " hit himself.");
                 stopGame();
@@ -57,10 +62,7 @@ public class TronEngine extends Engine {
         }
     }
 
-    @Override
-    public void checkCollisions() {
-        checkForPlayersCollisions();
-    }
+
 }
 
 
