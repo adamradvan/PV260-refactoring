@@ -1,7 +1,7 @@
 package games.snake;
 
 import core.Engine;
-import core.config.PlayersConfiguration;
+import core.config.GameConfiguration;
 import core.model.GameObject;
 import core.model.MovableGameObject;
 import core.model.Position;
@@ -16,7 +16,7 @@ import static games.snake.PositionGenerator.getValidPositionForFood;
 public class SnakeEngine extends Engine {
     public static final Color FOOD_COLOR = Color.RED;
 
-    Snake snake = PlayersConfiguration.PLAYER_1.toSnakeObject();
+    Snake snake = GameConfiguration.SNAKE_PLAYER.toSnakeObject();
     Food currentFood = createNewFood();
 
     @Override

@@ -1,20 +1,18 @@
 package games.tron;
 
 import core.Engine;
-import core.config.PlayersConfiguration;
+import core.config.GameConfiguration;
+import core.config.PlayerConfiguration;
 import core.model.GameObject;
 import core.model.MovableGameObject;
 import core.model.Position;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TronEngine extends Engine {
-    List<Bike> players = Arrays.stream(PlayersConfiguration.values())
-            .map(PlayersConfiguration::toBikeObject)
-            .collect(Collectors.toList());
+    List<Bike> players = GameConfiguration.TRON_PLAYERS.stream().map(PlayerConfiguration::toBikeObject).collect(Collectors.toList());
 
     @Override
     public List<GameObject> getGameObjects() {

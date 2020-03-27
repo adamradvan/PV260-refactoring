@@ -4,7 +4,7 @@ import games.tron.TronEngine;
 
 public class GameStarter {
     public static void main(String[] args) {
-        new Presentation(new TronEngine()).run();
-//        new Presentation(new SnakeEngine()).run();
+//        new Presentation(new TronEngine()).run();
+        new Presentation(new SnakeEngine()).run();
     }
 }

@@ -1,6 +1,7 @@
 package core;
 
 
+import core.config.GameConfiguration;
 import core.model.GameObject;
 import core.model.MovableGameObject;
 import core.model.Position;
@@ -78,7 +79,7 @@ public abstract class Engine implements ListenerManager {
             screenManager.update();
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(GameConfiguration.GAME_SPEED.milliseconds());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

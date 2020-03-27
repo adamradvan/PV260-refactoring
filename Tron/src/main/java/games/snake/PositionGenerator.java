@@ -9,7 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class PositionGenerator {
-
     public static Position getValidPositionForFood(List<Position> snakePath) {
         String path = snakePath.stream().map(Position::toString).collect(Collectors.joining(", "));
         System.out.println("Snake path: " + path);
