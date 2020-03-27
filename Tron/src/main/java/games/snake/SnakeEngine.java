@@ -47,7 +47,6 @@ public class SnakeEngine extends Engine {
 
     private void checkCollisionWithFood() {
         if (snake.getCurrentPosition().equals(currentFood.getPosition())) {
-            System.out.println("Snake ate food at position: " + currentFood.getPosition());
             snake.feedSnake();
             removeObject(currentFood);
             currentFood = createNewFood();

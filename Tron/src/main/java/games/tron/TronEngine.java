@@ -40,8 +40,7 @@ public class TronEngine extends Engine {
         List<Bike> others = players.stream().filter(p -> !p.equals(player)).collect(Collectors.toList());
         for (Bike otherPlayer : others) {
             for (Position positionOfOther : otherPlayer.getPositionHistory()) {
-                if (positionOfOther.equals(player.getCurrentPosition())) {
-                    System.out.println(player + " hit other " + otherPlayer);
+                if (positionOfOther.equals(player.getCurrentPosition())) {                    
                     stopGame();
                 }
             }

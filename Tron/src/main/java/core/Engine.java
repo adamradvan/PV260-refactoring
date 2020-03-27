@@ -20,9 +20,9 @@ import java.util.List;
 public abstract class Engine implements ListenerManager {
     private static final DisplayMode[] modes =
             {
-                    // new DisplayMode(1920,1080,32,0),
+                    new DisplayMode(1920, 1080, 32, 0),
                     new DisplayMode(1680, 1050, 32, 0),
-                    // new DisplayMode(1280,1024,32,0),
+                    new DisplayMode(1280, 1024, 32, 0),
                     new DisplayMode(800, 600, 32, 0),
                     new DisplayMode(800, 600, 24, 0),
                     new DisplayMode(800, 600, 16, 0),
@@ -104,18 +104,15 @@ public abstract class Engine implements ListenerManager {
 
     protected void addObject(GameObject gameObject) {
         gameObjects.add(gameObject);
-        System.out.println("Adding game objects:" + gameObject);
     }
 
     protected void removeObject(GameObject gameObject) {
         gameObjects.remove(gameObject);
-        System.out.println("Removing game objects:" + gameObject);
     }
 
     protected void checkSelfCollision(Position positionToCheck, List<Position> path) {
         for (Position positionFromPath : path) {
             if (positionFromPath.equals(positionToCheck) && positionFromPath != positionToCheck) {
-                System.out.println("Self collision has occurred");
                 stopGame();
             }
         }
@@ -139,7 +136,6 @@ public abstract class Engine implements ListenerManager {
         pressedKey = event.getKeyCode();
 
         if (pressedKey == KeyEvent.VK_ESCAPE) {
-            System.out.println("User input: ESCAPE, stopping the game");
             stopGame();
         }
 

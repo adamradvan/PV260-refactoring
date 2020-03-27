@@ -6,7 +6,6 @@ import core.model.Position;
 import core.model.controls.Controls;
 
 import java.awt.*;
-import java.util.stream.Collectors;
 
 public class Snake extends MovableGameObjectImpl {
 
@@ -24,7 +23,6 @@ public class Snake extends MovableGameObjectImpl {
     public void feedSnake() {
         Position snakeTail = getPositionHistory().get(0);
         getPositionHistory().add(0, snakeTail);
-        System.out.println("Snake is fed, his path:" + getPositionHistory().stream().map(Position::toString).collect(Collectors.joining(", ")));
     }
 
 }

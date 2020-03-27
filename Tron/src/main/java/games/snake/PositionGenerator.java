@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class PositionGenerator {
     public static Position getValidPositionForFood(List<Position> snakePath) {
         String path = snakePath.stream().map(Position::toString).collect(Collectors.joining(", "));
-        System.out.println("Snake path: " + path);
 
         while (true) {
             Position generatedPosition = randomPosition();
@@ -20,7 +19,6 @@ public class PositionGenerator {
         }
 
     }
-
 
     private static int randomNumber(int minInclusive, int maxInclusive) {
         int multiplier = GameConfiguration.SQUARE_SIZE;
@@ -38,12 +36,11 @@ public class PositionGenerator {
 
     private static boolean isGeneratedPositionValid(List<Position> snakePath, Position generatedPosition) {
         for (Position snakePartPosition : snakePath) {
-            if (snakePartPosition.equals(generatedPosition)) {
-                System.out.println("Generated INVALID food on position: " + generatedPosition);
+            if (snakePartPosition.equals(generatedPosition)) {                
                 return false;
             }
         }
-        System.out.println("Generated valid food on position: " + generatedPosition);
+        
         return true;
     }
 }
