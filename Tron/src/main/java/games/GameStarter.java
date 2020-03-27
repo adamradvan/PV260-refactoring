@@ -1,3 +1,5 @@
+package games;
+
 import core.presentation.Presentation;
 import games.snake.SnakeEngine;
 import games.tron.TronEngine;
