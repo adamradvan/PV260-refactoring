@@ -2,7 +2,7 @@ package core.model;
 
 import core.InputEventCallback;
 
-public interface PlayableGameObject extends GameObject, InputEventCallback {
+public interface MovableGameObject extends GameObject, InputEventCallback {
 
     void computeNextDirection();
 
@@ -12,7 +12,6 @@ public interface PlayableGameObject extends GameObject, InputEventCallback {
 
     void assignFromNextToCurrent();
 
-    @Override
     default void makeMove() {
         computeNextDirection();
         computeNextPosition();

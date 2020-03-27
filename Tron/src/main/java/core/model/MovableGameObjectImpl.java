@@ -6,34 +6,29 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.config.GameConfiguration.SQUARE_SIZE;
-
-public abstract class PlayableGameObjectImpl implements PlayableGameObject {
+public abstract class MovableGameObjectImpl extends GameObjectImpl implements MovableGameObject {
     protected Position nextPosition;
     private Controls controls;
-    private Color color;
-    private Position currentPosition;
     private Direction currentDirection;
     private Direction nextDirection;
     private List<Position> positionHistory = new ArrayList<>();
     private boolean parsedLatestInput = false;
     private int inputEvent;
 
-    public PlayableGameObjectImpl(Color color,
-                                  Controls controls,
-                                  Position initialPosition,
-                                  Direction initialDirection) {
-        this.color = color;
+    public MovableGameObjectImpl(Color color,
+                                 Controls controls,
+                                 Position initialPosition,
+                                 Direction initialDirection) {
+        super(color, initialPosition);
         this.controls = controls;
-        this.currentPosition = initialPosition;
         this.currentDirection = initialDirection;
     }
 
 
     @Override
     public void assignFromNextToCurrent() {
-        currentDirection = nextDirection;
-        currentPosition = nextPosition;
+        this.currentDirection = nextDirection;
+        super.position = nextPosition;
     }
 
     @Override
@@ -53,22 +48,21 @@ public abstract class PlayableGameObjectImpl implements PlayableGameObject {
 
     @Override
     public void computeNextPosition() {
-        if (nextDirection.isNextPositionInScreenScope(currentPosition)) {
-            nextPosition = nextDirection.newPositionInsideScreenScope(currentPosition);
+        if (nextDirection.isNextPositionInScreenScope(getCurrentPosition())) {
+            nextPosition = nextDirection.newPositionInsideScreenScope(getCurrentPosition());
         } else
-            nextPosition = nextDirection.newPositionAtScreenBeginning(currentPosition);
+            nextPosition = nextDirection.newPositionAtScreenBeginning(getCurrentPosition());
     }
 
     @Override
     public void drawObject(Graphics2D graphics) {
         for (Position position : positionHistory) {
-            graphics.setColor(color);
-            graphics.fillRect(position.getAxisX(), position.getAxisY(), SQUARE_SIZE, SQUARE_SIZE);
+            drawForPosition(position, graphics);
         }
     }
 
     public Position getCurrentPosition() {
-        return currentPosition;
+        return position;
     }
 
     public List<Position> getPositionHistory() {

@@ -20,7 +20,6 @@ public class KeyboardControls implements Controls {
 
     @Override
     public Direction obtainNewDirectionFromEvent(int eventCommand, Direction currentDirection) {
-        System.out.println(String.format("KeyEvent: %s, currDir: %s", eventCommand, currentDirection));
         Direction newDirection = mappedDirections.get(eventCommand);
 
         return (newDirection == null) ? currentDirection : newDirection.validatedFor(currentDirection);

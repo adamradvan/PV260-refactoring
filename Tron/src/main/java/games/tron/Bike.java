@@ -2,13 +2,13 @@ package games.tron;
 
 import core.config.GameConfiguration;
 import core.model.Direction;
-import core.model.PlayableGameObjectImpl;
+import core.model.MovableGameObjectImpl;
 import core.model.Position;
 import core.model.controls.Controls;
 
 import java.awt.*;
 
-public class Bike extends PlayableGameObjectImpl {
+public class Bike extends MovableGameObjectImpl {
     private static final GameConfiguration.GameObjectType GAME_OBJECT_TYPE = GameConfiguration.GameObjectType.BIKE;
 
     public Bike(Color color, Controls controls, Position initialPosition, Direction initialDirection) {

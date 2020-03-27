@@ -3,7 +3,7 @@ package games.tron;
 import core.Engine;
 import core.config.PlayersConfiguration;
 import core.model.GameObject;
-import core.model.PlayableGameObject;
+import core.model.MovableGameObject;
 import core.model.Position;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class TronEngine extends Engine {
     }
 
     @Override
-    public List<PlayableGameObject> getPlayableGameObjects() {
+    public List<MovableGameObject> getMovableGameObjects() {
         return new ArrayList<>(players);
     }
 
@@ -33,7 +33,7 @@ public class TronEngine extends Engine {
 
     private void checkForPlayersCollisions() {
         for (Bike player : players) {
-            checkPlayerPath(player);
+            checkSelfCollision(player.getCurrentPosition(), player.getPositionHistory());
             checkOthersPath(player);
         }
     }
@@ -50,14 +50,7 @@ public class TronEngine extends Engine {
         }
     }
 
-    private void checkPlayerPath(Bike player) {
-        for (Position playerHistoryPosition : player.getPositionHistory()) {
-            if (playerHistoryPosition.equals(player.getCurrentPosition()) && playerHistoryPosition != player.getCurrentPosition()) {
-                System.out.println(player + " hit himself.");
-                stopGame();
-            }
-        }
-    }
+
 }
 
 

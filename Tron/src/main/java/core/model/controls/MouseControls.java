@@ -30,7 +30,6 @@ public class MouseControls implements Controls {
 
     @Override
     public Direction obtainNewDirectionFromEvent(int eventCommand, Direction currentDirection) {
-        System.out.println(String.format("click: %s, currDir: %s", eventCommand, currentDirection));
         Integer indexOfNeighbour = mappedIndexes.get(eventCommand);
 
         return (indexOfNeighbour == null) ? currentDirection :

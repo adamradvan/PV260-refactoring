@@ -11,6 +11,4 @@ public interface GameObject {
 
     void drawObject(Graphics2D graphics);
 
-    void makeMove();
-
 }

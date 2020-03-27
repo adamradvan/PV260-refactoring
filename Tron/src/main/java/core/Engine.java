@@ -2,7 +2,8 @@ package core;
 
 
 import core.model.GameObject;
-import core.model.PlayableGameObject;
+import core.model.MovableGameObject;
+import core.model.Position;
 import core.presentation.GraphicsCallBack;
 import core.presentation.ScreenManager;
 import core.presentation.ScreenParameters;
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,8 +33,8 @@ public abstract class Engine implements ListenerManager {
     protected ScreenManager screenManager = new ScreenManager();
     protected ScreenParameters screenParameters = ScreenParameters.getInstance();
     private GraphicsCallBack presentationGraphics;
-    private List<GameObject> gameObjects;
-    private List<PlayableGameObject> playableGameObjects;
+    private List<GameObject> gameObjects = new ArrayList<>();
+    private List<MovableGameObject> movableGameObjects = new ArrayList<>();
     private int pressedKey;
     private boolean running;
 
@@ -53,7 +55,7 @@ public abstract class Engine implements ListenerManager {
 
     public abstract List<GameObject> getGameObjects();
 
-    public abstract List<PlayableGameObject> getPlayableGameObjects();
+    public abstract List<MovableGameObject> getMovableGameObjects();
 
     public void startEngine() {
         try {
@@ -70,13 +72,13 @@ public abstract class Engine implements ListenerManager {
         while (running) {
             presentationGraphics.onUpdateGraphics(gameObjects);
             checkCollisions();
-            for (GameObject gameObject : gameObjects) {
-                gameObject.makeMove();
+            for (MovableGameObject movable : movableGameObjects) {
+                movable.makeMove();
             }
             screenManager.update();
 
             try {
-                Thread.sleep(20);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -92,21 +94,31 @@ public abstract class Engine implements ListenerManager {
     }
 
     protected void loadPlayableObjects() {
-        List<PlayableGameObject> playableGameObjects = getPlayableGameObjects();
-        if (playableGameObjects == null) {
+        List<MovableGameObject> movableGameObjects = getMovableGameObjects();
+        if (movableGameObjects == null) {
             throw new IllegalArgumentException("Playable game objects must be initialised in engine implementation");
         }
-        this.playableGameObjects = playableGameObjects;
+        this.movableGameObjects = movableGameObjects;
     }
 
     protected void addObject(GameObject gameObject) {
-        //todo:
+        gameObjects.add(gameObject);
+        System.out.println("Adding game objects:" + gameObject);
     }
 
     protected void removeObject(GameObject gameObject) {
-        //todo:
+        gameObjects.remove(gameObject);
+        System.out.println("Removing game objects:" + gameObject);
     }
 
+    protected void checkSelfCollision(Position positionToCheck, List<Position> path) {
+        for (Position positionFromPath : path) {
+            if (positionFromPath.equals(positionToCheck) && positionFromPath != positionToCheck) {
+                System.out.println("Self collision has occurred");
+                stopGame();
+            }
+        }
+    }
 
     protected void startGame() {
         running = true;
@@ -130,7 +142,7 @@ public abstract class Engine implements ListenerManager {
             stopGame();
         }
 
-        for (PlayableGameObject playable : playableGameObjects) {
+        for (MovableGameObject playable : movableGameObjects) {
             playable.inputEventCallback(pressedKey);
         }
     }
@@ -139,7 +151,7 @@ public abstract class Engine implements ListenerManager {
     public void mouseClicked(MouseEvent event) {
         pressedKey = event.getButton();
 
-        for (PlayableGameObject playable : playableGameObjects) {
+        for (MovableGameObject playable : movableGameObjects) {
             playable.inputEventCallback(pressedKey);
         }
     }
