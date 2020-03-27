@@ -1,8 +1,11 @@
-package Core;
+package core;
 
 
-import Core.models.GameObject;
-import Core.models.PlayableGameObject;
+import core.model.GameObject;
+import core.model.PlayableGameObject;
+import core.presentation.GraphicsCallBack;
+import core.presentation.ScreenManager;
+import core.presentation.ScreenParameters;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -25,22 +28,25 @@ public abstract class Engine implements ListenerManager {
                     new DisplayMode(640, 480, 16, 0),
             };
     private final Window window;
-    private final GraphicsCallBack presentationGraphics;
     protected ScreenManager screenManager = new ScreenManager();
     protected ScreenParameters screenParameters = ScreenParameters.getInstance();
+    private GraphicsCallBack presentationGraphics;
     private List<GameObject> gameObjects;
     private List<PlayableGameObject> playableGameObjects;
     private int pressedKey;
     private boolean running;
 
-    protected Engine(GraphicsCallBack graphicsInterface) {
-        this.presentationGraphics = graphicsInterface;
+    protected Engine() {
         DisplayMode displayMode = screenManager.findFirstCompatibleMode(modes);
         screenManager.setFullScreen(displayMode);
         screenParameters.height = screenManager.getHeight();
         screenParameters.width = screenManager.getWidth();
         window = screenManager.getFullScreenWindow();
         initializeWindow();
+    }
+
+    public void setPresentationGraphics(GraphicsCallBack presentationGraphics) {
+        this.presentationGraphics = presentationGraphics;
     }
 
     public abstract void checkCollisions();

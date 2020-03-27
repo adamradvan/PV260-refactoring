@@ -1,6 +1,6 @@
-package Core.models;
+package core.model;
 
-import Core.InputEventCallback;
+import core.InputEventCallback;
 
 public interface PlayableGameObject extends GameObject, InputEventCallback {
 
@@ -8,7 +8,7 @@ public interface PlayableGameObject extends GameObject, InputEventCallback {
 
     void computeNextPosition();
 
-    void addNextPositionToHistory();
+    void modifyPositionHistory();
 
     void assignFromNextToCurrent();
 
@@ -16,7 +16,7 @@ public interface PlayableGameObject extends GameObject, InputEventCallback {
     default void makeMove() {
         computeNextDirection();
         computeNextPosition();
-        addNextPositionToHistory();
+        modifyPositionHistory();
         assignFromNextToCurrent();
     }
 }

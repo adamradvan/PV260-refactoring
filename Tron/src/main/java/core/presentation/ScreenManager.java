@@ -1,4 +1,4 @@
-package Core;
+package core.presentation;
 
 import javax.swing.*;
 import java.awt.*;

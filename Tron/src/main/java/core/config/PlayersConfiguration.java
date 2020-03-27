@@ -1,9 +1,12 @@
-package Model;
+package core.config;
 
-import Core.controls.Controls;
-import Core.Direction;
-import Core.controls.KeyboardControls;
-import Core.controls.MouseControls;
+import core.model.Direction;
+import core.model.Position;
+import core.model.controls.Controls;
+import core.model.controls.KeyboardControls;
+import core.model.controls.MouseControls;
+import games.snake.Snake;
+import games.tron.Bike;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -43,6 +46,10 @@ public enum PlayersConfiguration {
 
     public Bike toBikeObject() {
         return new Bike(color, controls, startingPosition, startingDirection);
+    }
+
+    public Snake toSnakeObject() {
+        return new Snake(color, controls, startingPosition, startingDirection);
     }
 
     private static class PlayerControls {

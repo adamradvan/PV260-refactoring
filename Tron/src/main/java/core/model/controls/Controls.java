@@ -1,6 +1,6 @@
-package Core.controls;
+package core.model.controls;
 
-import Core.Direction;
+import core.model.Direction;
 
 public interface Controls {
 

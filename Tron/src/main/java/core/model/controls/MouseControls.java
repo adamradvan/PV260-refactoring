@@ -1,12 +1,11 @@
-package Core.controls;
+package core.model.controls;
 
-import Core.Direction;
-import Core.controls.Controls;
+import core.model.Direction;
 
 import java.util.List;
 import java.util.Map;
 
-import static Core.Direction.*;
+import static core.model.Direction.*;
 
 public class MouseControls implements Controls {
 

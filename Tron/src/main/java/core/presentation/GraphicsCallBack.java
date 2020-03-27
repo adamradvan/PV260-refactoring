@@ -1,6 +1,6 @@
-package Core;
+package core.presentation;
 
-import Core.models.GameObject;
+import core.model.GameObject;
 
 import java.util.List;
 

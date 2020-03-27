@@ -1,8 +1,8 @@
-package Core;
+package core.model;
 
-import Model.Position;
+import core.presentation.ScreenParameters;
 
-import static Model.TronGameConfiguration.MOVE_AMOUNT;
+import static core.config.GameConfiguration.SQUARE_SIZE;
 
 public enum Direction {
     UP {
@@ -13,7 +13,7 @@ public enum Direction {
 
         @Override
         public boolean isNextPositionInScreenScope(Position currentPosition) {
-            return currentPosition.getAxisY() - MOVE_AMOUNT >= 0;
+            return currentPosition.getAxisY() - SQUARE_SIZE >= 0;
         }
 
         @Override
@@ -23,7 +23,7 @@ public enum Direction {
 
         @Override
         public Position newPositionInsideScreenScope(Position currentPosition) {
-            return new Position(currentPosition.getAxisX(), currentPosition.getAxisY() - MOVE_AMOUNT);
+            return new Position(currentPosition.getAxisX(), currentPosition.getAxisY() - SQUARE_SIZE);
         }
 
     },
@@ -35,7 +35,7 @@ public enum Direction {
 
         @Override
         public boolean isNextPositionInScreenScope(Position currentPosition) {
-            return currentPosition.getAxisY() + MOVE_AMOUNT <= ScreenParameters.getInstance().height;
+            return currentPosition.getAxisY() + SQUARE_SIZE <= ScreenParameters.getInstance().height;
 
         }
 
@@ -46,7 +46,7 @@ public enum Direction {
 
         @Override
         public Position newPositionInsideScreenScope(Position currentPosition) {
-            return new Position(currentPosition.getAxisX(), currentPosition.getAxisY() + MOVE_AMOUNT);
+            return new Position(currentPosition.getAxisX(), currentPosition.getAxisY() + SQUARE_SIZE);
         }
 
     },
@@ -58,7 +58,7 @@ public enum Direction {
 
         @Override
         public boolean isNextPositionInScreenScope(Position currentPosition) {
-            return currentPosition.getAxisX() + MOVE_AMOUNT <= ScreenParameters.getInstance().width;
+            return currentPosition.getAxisX() + SQUARE_SIZE <= ScreenParameters.getInstance().width;
         }
 
         @Override
@@ -68,7 +68,7 @@ public enum Direction {
 
         @Override
         public Position newPositionInsideScreenScope(Position currentPosition) {
-            return new Position(currentPosition.getAxisX() + MOVE_AMOUNT, currentPosition.getAxisY());
+            return new Position(currentPosition.getAxisX() + SQUARE_SIZE, currentPosition.getAxisY());
         }
     },
     LEFT {
@@ -79,7 +79,7 @@ public enum Direction {
 
         @Override
         public boolean isNextPositionInScreenScope(Position currentPosition) {
-            return currentPosition.getAxisX() + MOVE_AMOUNT >= 0;
+            return currentPosition.getAxisX() + SQUARE_SIZE >= 0;
         }
 
         @Override
@@ -89,7 +89,7 @@ public enum Direction {
 
         @Override
         public Position newPositionInsideScreenScope(Position currentPosition) {
-            return new Position(currentPosition.getAxisX() - MOVE_AMOUNT, currentPosition.getAxisY());
+            return new Position(currentPosition.getAxisX() - SQUARE_SIZE, currentPosition.getAxisY());
         }
     };
 

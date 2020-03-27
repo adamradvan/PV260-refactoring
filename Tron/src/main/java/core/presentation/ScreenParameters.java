@@ -1,4 +1,4 @@
-package Core;
+package core.presentation;
 
 public class ScreenParameters {
     private static ScreenParameters screenParameters = null;

@@ -1,22 +1,23 @@
-package View;
+package core.presentation;
 
-import Core.Engine;
-import Core.models.GameObject;
-import Core.GraphicsCallBack;
-import Core.ScreenParameters;
-import Model.TronEngine;
+import core.Engine;
+import core.model.GameObject;
 
 import java.awt.*;
 import java.util.List;
 
 public class Presentation implements GraphicsCallBack {
-    Engine tronEngine;
+    Engine gameEngine;
     Graphics2D graphics;
 
+    public Presentation(Engine gameEngine) {
+        this.gameEngine = gameEngine;
+    }
+
     public void run() {
-        tronEngine = new TronEngine(this);
-        graphics = tronEngine.getGraphics();
-        tronEngine.startEngine();
+        gameEngine.setPresentationGraphics(this);
+        graphics = gameEngine.getGraphics();
+        gameEngine.startEngine();
         graphics.dispose();
         System.exit(0);
     }

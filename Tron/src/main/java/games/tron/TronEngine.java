@@ -1,9 +1,10 @@
-package Model;
+package games.tron;
 
-import Core.Engine;
-import Core.models.GameObject;
-import Core.GraphicsCallBack;
-import Core.models.PlayableGameObject;
+import core.Engine;
+import core.config.PlayersConfiguration;
+import core.model.GameObject;
+import core.model.PlayableGameObject;
+import core.model.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +15,6 @@ public class TronEngine extends Engine {
     List<Bike> players = Arrays.stream(PlayersConfiguration.values())
             .map(PlayersConfiguration::toBikeObject)
             .collect(Collectors.toList());
-
-    public TronEngine(GraphicsCallBack graphicsInterface) {
-        super(graphicsInterface);
-    }
 
     @Override
     public List<GameObject> getGameObjects() {
@@ -61,8 +58,6 @@ public class TronEngine extends Engine {
             }
         }
     }
-
-
 }
 
 

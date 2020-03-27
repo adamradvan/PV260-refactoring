@@ -1,20 +1,18 @@
-package Core.models;
+package core.model;
 
-import Core.Direction;
-import Core.controls.Controls;
-import Model.Position;
+import core.model.controls.Controls;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Model.TronGameConfiguration.MOVE_AMOUNT;
+import static core.config.GameConfiguration.SQUARE_SIZE;
 
 public abstract class PlayableGameObjectImpl implements PlayableGameObject {
+    protected Position nextPosition;
     private Controls controls;
     private Color color;
     private Position currentPosition;
-    private Position nextPosition;
     private Direction currentDirection;
     private Direction nextDirection;
     private List<Position> positionHistory = new ArrayList<>();
@@ -62,16 +60,10 @@ public abstract class PlayableGameObjectImpl implements PlayableGameObject {
     }
 
     @Override
-    public void addNextPositionToHistory() {
-        positionHistory.add(nextPosition);
-    }
-
-
-    @Override
     public void drawObject(Graphics2D graphics) {
         for (Position position : positionHistory) {
             graphics.setColor(color);
-            graphics.fillRect(position.getAxisX(), position.getAxisY(), MOVE_AMOUNT, MOVE_AMOUNT);
+            graphics.fillRect(position.getAxisX(), position.getAxisY(), SQUARE_SIZE, SQUARE_SIZE);
         }
     }
 

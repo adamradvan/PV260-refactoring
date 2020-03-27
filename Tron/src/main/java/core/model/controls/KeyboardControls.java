@@ -1,7 +1,6 @@
-package Core.controls;
+package core.model.controls;
 
-import Core.Direction;
-import Core.controls.Controls;
+import core.model.Direction;
 
 import java.util.Map;
 
